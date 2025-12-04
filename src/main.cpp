@@ -59,7 +59,7 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
       {"RED BLUE LEFT", redblue_left},
-      {"Turn\n\nTurn 3 times.", turn_example},
+      {"RED BLUE RIGHT", redblue_right},
       {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
       {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
       {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
@@ -268,7 +268,7 @@ void opcontrol() {
     }
     hood.button_toggle(master.get_digital(DIGITAL_B));
     indexer.button_toggle(master.get_digital(DIGITAL_A));
-    matchloader.button_toggle(master.get_digital(DIGITAL_UP));
+    matchloader.button_toggle(master.get_digital(DIGITAL_DOWN));
 
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME

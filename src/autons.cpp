@@ -56,49 +56,96 @@ void redblue_left() {
   // The second parameter is max speed the robot will drive at
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
+  indexer.set(true);
   intake.move(127);  // Start intake moving
   chassis.pid_turn_set(-20_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_odom_set(19_in, 59);
   chassis.pid_wait();
   matchloader.set(true);
-  hood.set(true);
   chassis.pid_odom_set(5_in, 59);
   chassis.pid_wait();
   pros::delay(1000);
-  intake.move(0);
-  //chassis.pid_odom_set(0_in, 110);
   chassis.pid_wait();
   chassis.pid_turn_set(45_deg, 60);
+  intake.move(0);
+  hood.set(true);
   pros::delay(1000);
   chassis.pid_odom_set(12_in, 50);
+  indexer.set(false);
   chassis.pid_wait();
   intake.move(127);
   pros::delay(3000);
   intake.move(0);
   chassis.pid_odom_set(-50_in, 110);
   chassis.pid_wait();
+  hood.set(false);
   chassis.pid_turn_set(180_deg, 100);
   matchloader.set(true);
+  indexer.set(true);
   intake.move(127);
-  chassis.pid_odom_set(10_in, 110);
+  chassis.pid_odom_set(7_in, 110);
   chassis.pid_wait();
   pros::delay(900);
-  chassis.pid_odom_set(-6_in, 117);
+  chassis.pid_odom_set(-10_in, 117);
   chassis.pid_wait();
-  chassis.pid_turn_set(-180_deg, 100);
+  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
+  chassis.pid_turn_set(180_deg, 100);
+  chassis.pid_wait();
+  matchloader.set(false);
+  chassis.pid_odom_set(16_in, 110);
+  indexer.set(false);
+  chassis.pid_wait();
+  intake.move(127);
 
 
 
 }
 // Turn Example
 ///
-void turn_example() {
-  // The first parameter is the target in degrees
-  // The second parameter is max speed the robot will drive at
-  chassis.pid_odom_set(24_in, 100);
-
+void redblue_right() {
+  indexer.set(true);
+  intake.move(127);  // Start intake moving
+  chassis.pid_turn_set(20_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_odom_set(19_in, 59);
+  chassis.pid_wait();
   matchloader.set(true);
+  chassis.pid_odom_set(5_in, 59);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-45_deg, 60);
+  intake.move(0);
+  hood.set(false);
+  matchloader.set(false);
+  pros::delay(1000);
+  chassis.pid_odom_set(12_in, 50);
+  indexer.set(false);
+  chassis.pid_wait();
+  intake.move(-127);
+  pros::delay(3000);
+  intake.move(0);
+  chassis.pid_odom_set(-50_in, 110);
+  chassis.pid_wait();
+  hood.set(false);
+  chassis.pid_turn_set(-180_deg, 100);
+  matchloader.set(true);
+  indexer.set(true);
+  intake.move(127);
+  chassis.pid_odom_set(7_in, 110);
+  chassis.pid_wait();
+  pros::delay(900);
+  chassis.pid_odom_set(-10_in, 117);
+  chassis.pid_wait();
+  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
+  chassis.pid_turn_set(-180_deg, 100);
+  chassis.pid_wait();
+  matchloader.set(false);
+  chassis.pid_odom_set(16_in, 110);
+  indexer.set(false);
+  chassis.pid_wait();
+  intake.move(127);
 
 }
 
