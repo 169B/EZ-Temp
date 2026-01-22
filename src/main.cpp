@@ -267,16 +267,19 @@ void opcontrol() {
       intake.move(0);
     }
 
-    if (master.get_digital(DIGITAL_B)) {
+
+    if (master.get_digital_new_press(DIGITAL_B)) {
+      intake_running = !intake_running;
+    }
+
+    // Spin the intake if intake_running is true
+    if (intake_running) {
       hoodmotor.move(127);
-    } 
-    else if (master.get_digital(DIGITAL_DOWN)) {
-      hoodmotor.move(-127);
-    } 
+    }
+    // Stop the intake if intake_running is false 
     else {
       hoodmotor.move(0);
     }
-
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
