@@ -58,17 +58,18 @@ void redblue_left() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
   hoodmotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
   intake.move(127);
-  chassis.pid_odom_set({{-3_in, 24_in}, fwd, 110});
+  chassis.pid_odom_set(20_in, 50);
   chassis.pid_wait();
   pros::delay(500);
-  chassis.pid_odom_set({{-24_in, 5_in}, fwd, 110});
+  chassis.pid_odom_set(4_in, 25);
   chassis.pid_wait();
-  chassis.pid_odom_set({{-24_in, 2_in}, fwd, 110});
-  intake.move(127);
-  hoodmotor.move(127);
-  pros::delay(2000);
+  pros::delay(500);
+  chassis.pid_turn_set(-90_deg, 60);
+  intake.move(0);
+  chassis.pid_odom_set(28_in, 50);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, 60);
 
 }
 // Turn Example
