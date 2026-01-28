@@ -11,7 +11,7 @@ ez::Drive chassis(
     {-11, -12, 13},     // Left Chassis Ports (negative port will reverse it!)
     {-18, 19, 20},  // Right Chassis Ports (negative port will reverse it!)
 
-    14,      // IMU Port
+    4,      // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -243,9 +243,6 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
-  // Boolean for if the intake is spinning
-  bool intake_running = false;
-
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
@@ -255,31 +252,43 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
-    
-    // Set intake_running to the opposite of itself
+
+    // L1 spins both intake and hood forward
+    if (master.get_digital(DIGITAL_B)) {
+      intake.move(-50);
+      pros::delay(300);
+    }
     if (master.get_digital(DIGITAL_R1)) {
       intake.move(127);
-    } 
+      hoodmotor.move(-127);
+    }
     else if (master.get_digital(DIGITAL_R2)) {
       intake.move(-127);
-    } 
-    else {
-      intake.move(0);
-    }
-
-
-    if (master.get_digital_new_press(DIGITAL_B)) {
-      intake_running = !intake_running;
-    }
-
-    // Spin the intake if intake_running is true
-    if (intake_running) {
       hoodmotor.move(127);
     }
-    // Stop the intake if intake_running is false 
-    else {
+    // R1 spins only the intake forward
+    else if (master.get_digital(DIGITAL_L1)) {
+      intake.move(127);
       hoodmotor.move(0);
     }
+    // R2 reverses the intake
+    else if (master.get_digital(DIGITAL_L2)) {
+      intake.move(-127);
+      hoodmotor.move(0)
+      
+      
+      ;
+    }
+    // Stop both when no buttons are pressed
+    else {
+      intake.move(0);
+      hoodmotor.move(0);
+    }
+    ml.button_toggle(master.get_digital(DIGITAL_Y));
+    wing.button_toggle(master.get_digital(DIGITAL_UP));
+
+
+
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
