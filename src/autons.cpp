@@ -64,7 +64,7 @@ void redblue_left() {
   chassis.pid_odom_set({{-5_in, 15_in}, fwd, 110});
   chassis.pid_wait();
   chassis.pid_odom_set({{-5_in, 24_in}, fwd, 50});
-  pros::delay(800);
+  pros::delay(900);
   intake.move(0);
   chassis.pid_wait();
   chassis.pid_odom_set({{-32_in, -3_in}, fwd, 110});
@@ -83,7 +83,7 @@ void redblue_left() {
   intake.move(127);
   chassis.pid_odom_set({{-32_in, -12_in}, fwd, 70});
   chassis.pid_wait();
-  pros::delay(170);
+  pros::delay(150);
   intake.move(0);
   hoodmotor.move(0);
   ml.set(false);
@@ -99,36 +99,17 @@ void redblue_left() {
   chassis.pid_odom_set({{-32_in, 60_in}, rev, 110});
 
   
-  /*
-  chassis.pid_odom_set({{-33_in, -3_in}, fwd, 110});
-  chassis.pid_wait();
-  intake.move(0);
-  chassis.pid_turn_set({-33_in, -7_in}, fwd, 110);
-  chassis.pid_wait();
-  ml.set(true);
-  chassis.pid_odom_set({{-33_in, -9_in}, fwd, 110});
-  chassis.pid_wait();
-  chassis.pid_odom_set({{-33_in, 24_in}, rev, 100});
-  intake.move(127);
-  intake.move(127);
-  pros::delay(1500);
 
-  intake.move(0);
-  chassis.pid_odom_set({{-33_in, 24_in}, rev, 110});
-  chassis.pid_wait();
-  intake.move(127);
-  hoodmotor.move(127);
-  pros::delay(2000);
-  chassis.pid_odom_set({{-33_in, 20_in}, fwd, 110});
-  chassis.pid_wait();
-  chassis.pid_odom_set({{-33_in, 24_in}, fwd, 110});
-*/
 
 
 }
 // Turn Example
 ///
 void redblue_right() {
+  // The first parameter is target inches
+  // The second parameter is max speed the robot will drive at
+  // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
+  // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
   hoodmotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);
   intake.move(127);
@@ -136,7 +117,7 @@ void redblue_right() {
   chassis.pid_odom_set({{5_in, 15_in}, fwd, 110});
   chassis.pid_wait();
   chassis.pid_odom_set({{5_in, 24_in}, fwd, 50});
-  pros::delay(800);
+  pros::delay(900);
   intake.move(0);
   chassis.pid_wait();
   chassis.pid_odom_set({{32_in, -3_in}, fwd, 110});
@@ -147,7 +128,28 @@ void redblue_right() {
   chassis.pid_wait();
   intake.move(127);
   hoodmotor.move(-127);
-  pros::delay(1000);
+  pros::delay(1500);
+  hoodmotor.move(30);
+  intake.move(0);
+  hoodmotor.move(0);
+  ml.set(true);
+  intake.move(127);
+  chassis.pid_odom_set({{32_in, -12_in}, fwd, 70});
+  chassis.pid_wait();
+  pros::delay(150);
+  intake.move(0);
+  hoodmotor.move(0);
+  ml.set(false);
+  chassis.pid_odom_set({{32_in, 24_in}, rev, 100});
+  chassis.pid_wait();
+  intake.move(127);
+  hoodmotor.move(-127);
+  pros::delay(2000);
+  chassis.pid_odom_set({{32_in, 15_in}, fwd, 100});
+  chassis.pid_wait();
+  chassis.pid_odom_set({{32_in, 24_in}, rev, 110});
+  chassis.pid_wait();
+  chassis.pid_odom_set({{32_in, 60_in}, rev, 110});
 
 }
 
