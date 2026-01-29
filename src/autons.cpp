@@ -60,9 +60,46 @@ void redblue_left() {
   hoodmotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);
   intake.move(127);
-  chassis.pid_odom_set({{-5_in, 24_in}, fwd, 110});
+  hoodmotor.move(30);
+  chassis.pid_odom_set({{-5_in, 15_in}, fwd, 110});
   chassis.pid_wait();
+  chassis.pid_odom_set({{-5_in, 24_in}, fwd, 50});
   pros::delay(800);
+  intake.move(0);
+  chassis.pid_wait();
+  chassis.pid_odom_set({{-32_in, -3_in}, fwd, 110});
+  chassis.pid_wait();
+  chassis.pid_turn_set({-32_in, -7_in}, fwd, 110);
+  chassis.pid_wait();
+  chassis.pid_odom_set({{-32_in, 24_in}, rev, 100});
+  chassis.pid_wait();
+  intake.move(127);
+  hoodmotor.move(-127);
+  pros::delay(1500);
+  hoodmotor.move(30);
+  intake.move(0);
+  hoodmotor.move(0);
+  ml.set(true);
+  intake.move(127);
+  chassis.pid_odom_set({{-32_in, -12_in}, fwd, 70});
+  chassis.pid_wait();
+  pros::delay(170);
+  intake.move(0);
+  hoodmotor.move(0);
+  ml.set(false);
+  chassis.pid_odom_set({{-32_in, 24_in}, rev, 100});
+  chassis.pid_wait();
+  intake.move(127);
+  hoodmotor.move(-127);
+  pros::delay(2000);
+  chassis.pid_odom_set({{-32_in, 15_in}, fwd, 100});
+  chassis.pid_wait();
+  chassis.pid_odom_set({{-32_in, 24_in}, rev, 110});
+  chassis.pid_wait();
+  chassis.pid_odom_set({{-32_in, 60_in}, rev, 110});
+
+  
+  /*
   chassis.pid_odom_set({{-33_in, -3_in}, fwd, 110});
   chassis.pid_wait();
   intake.move(0);
@@ -71,8 +108,11 @@ void redblue_left() {
   ml.set(true);
   chassis.pid_odom_set({{-33_in, -9_in}, fwd, 110});
   chassis.pid_wait();
+  chassis.pid_odom_set({{-33_in, 24_in}, rev, 100});
+  intake.move(127);
   intake.move(127);
   pros::delay(1500);
+
   intake.move(0);
   chassis.pid_odom_set({{-33_in, 24_in}, rev, 110});
   chassis.pid_wait();
@@ -81,8 +121,8 @@ void redblue_left() {
   pros::delay(2000);
   chassis.pid_odom_set({{-33_in, 20_in}, fwd, 110});
   chassis.pid_wait();
-  chassis.pid_turn_set({-30_in, 24_in}, fwd, 110);
-
+  chassis.pid_odom_set({{-33_in, 24_in}, fwd, 110});
+*/
 
 
 }
@@ -90,23 +130,24 @@ void redblue_left() {
 ///
 void redblue_right() {
   hoodmotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+  chassis.odom_xyt_set(0_in, 0_in, 0_deg);
   intake.move(127);
-  chassis.pid_odom_set(20_in, 50);
+  hoodmotor.move(30);
+  chassis.pid_odom_set({{5_in, 15_in}, fwd, 110});
   chassis.pid_wait();
-  pros::delay(500);
-  chassis.pid_odom_set(4_in, 25);
-  chassis.pid_wait();
-  pros::delay(500);
-  chassis.pid_turn_set(90_deg, 60);
+  chassis.pid_odom_set({{5_in, 24_in}, fwd, 50});
+  pros::delay(800);
   intake.move(0);
-  chassis.pid_odom_set(28_in, 50);
   chassis.pid_wait();
-  chassis.pid_turn_set(120_deg, 60);
+  chassis.pid_odom_set({{32_in, -3_in}, fwd, 110});
   chassis.pid_wait();
-  chassis.pid_odom_set(-10_in, 50);
+  chassis.pid_turn_set({32_in, -7_in}, fwd, 110);
+  chassis.pid_wait();
+  chassis.pid_odom_set({{32_in, 24_in}, rev, 100});
+  chassis.pid_wait();
   intake.move(127);
-  hoodmotor.move(127);
-  pros::delay(2000);
+  hoodmotor.move(-127);
+  pros::delay(1000);
 
 }
 

@@ -7,8 +7,8 @@ extern Drive chassis;
 
 // Your motors, sensors, etc. should go here.  Below are examples
 
-inline pros::Motor intake(8);
-inline pros::Motor hoodmotor(7);
+inline pros::Motor intake(7);
+inline pros::Motor hoodmotor(8);
 // inline pros::adi::DigitalIn limit_switch('A');
 inline ez::Piston wing('B');
 inline ez::Piston ml('A');
